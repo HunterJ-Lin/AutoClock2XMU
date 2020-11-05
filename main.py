@@ -2,6 +2,8 @@ from selenium import webdriver
 import time
 import datetime
 log = open('./log.txt','a')
+username = '31520201153917' #统一身份用户名
+password = 'ljh19970412'  #统一身份密码
 while True:   
     try:
         log.write('当前时间： '+str(datetime.datetime.now())+'\n')
@@ -17,8 +19,6 @@ while True:
             browser.get('https://xmuxg.xmu.edu.cn/xmu/login')
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[2]').click()
-            username = '31520201153917'
-            password = 'ljh19970412'
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="username"]').send_keys(username)
             browser.find_element_by_xpath('//*[@id="password"]').send_keys(password)
