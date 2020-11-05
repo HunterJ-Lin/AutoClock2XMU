@@ -19,6 +19,8 @@ while True:
             browser.get('https://xmuxg.xmu.edu.cn/xmu/login')
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[2]').click()
+            username = ''
+            password = ''
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="username"]').send_keys(username)
             browser.find_element_by_xpath('//*[@id="password"]').send_keys(password)
