@@ -1,5 +1,5 @@
 # AutoClock2XMU
-厦门大学疫情自动打卡
+厦门大学疫情自动打卡，07:00~12:00，每5分钟自动轮询打卡情况（可配置）
 
 # 环境要求
 windows、python、selenium（需要配置chromedriver驱动）、根据自己的统一身份认证配置main.py里的username和password
