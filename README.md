@@ -6,5 +6,7 @@ windows、python、selenium（需要配置chromedriver驱动）、根据自己�
 
 # 使用方法
 1、双击start_hidden.vbs(一次，不然会开启多个后台进程)
+
 2、双击stop_all_python.bat(注意！！！会杀死所有python进程)
+
 3、log.txt可以查看打卡情况
