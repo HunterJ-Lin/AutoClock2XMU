@@ -15,8 +15,8 @@ while True:
             log.write(str(datetime.datetime.now())+' 询问打卡'+'\n')
             option = webdriver.ChromeOptions()
             option.add_experimental_option('excludeSwitches', ['enable-automation'])
-            #option.add_argument('--headless')
-            #option.add_argument('--disable-gpu')
+            option.add_argument('--headless')
+            option.add_argument('--disable-gpu')
             browser = webdriver.Chrome(executable_path="C:/Program Files/Google/Chrome/Application/chromedriver.exe",options=option)
             browser.get('https://xmuxg.xmu.edu.cn/xmu/login')
             time.sleep(0.1)
@@ -56,7 +56,7 @@ while True:
             log.write('不到打卡时间'+'\n')
             log.write('++++++'+'\n')
 
-        time.sleep(10*60)
+        time.sleep(0.1)
     except Exception:
         log.write('出现异常'+'\n')
         browser.quit()
