@@ -2,8 +2,8 @@ from selenium import webdriver
 import time
 import datetime
 log = open('./log.txt','a')
-username = '' #统一身份用户名
-password = ''  #统一身份密码
+username = '31520201153917' #统一身份用户名
+password = 'ljh19970412'  #统一身份密码
 while True:   
     try:
         log.write('当前时间： '+str(datetime.datetime.now())+'\n')
@@ -13,14 +13,12 @@ while True:
             log.write(str(datetime.datetime.now())+' 询问打卡'+'\n')
             option = webdriver.ChromeOptions()
             option.add_experimental_option('excludeSwitches', ['enable-automation'])
-            option.add_argument('--headless')
-            option.add_argument('--disable-gpu')
+            #option.add_argument('--headless')
+            #option.add_argument('--disable-gpu')
             browser = webdriver.Chrome(executable_path="C:/Program Files/Google/Chrome/Application/chromedriver.exe",options=option)
             browser.get('https://xmuxg.xmu.edu.cn/xmu/login')
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[2]').click()
-            username = ''
-            password = ''
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="username"]').send_keys(username)
             browser.find_element_by_xpath('//*[@id="password"]').send_keys(password)
@@ -44,11 +42,10 @@ while True:
             if browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[1]').get_attribute('innerHTML') == '是 Yes':
                 log.write('已打过卡'+'\n')
             else:
-                browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
-                time.sleep(0.2)
-                browser.find_element_by_xpath('/html/body/div[8]/ul/div/div[3]/li/label').click()
-                time.sleep(0.2)
-                browser.find_element_by_xpath('//*[@id="preview1604556559372"]/span/span').click()
+                browser.find_element_by_xpath('/html/body/div[8]/ul/div/div[3]/li').click()
+                browser.find_element_by_class_name('form-save').click()
+                alert = browser.switch_to.alert
+                alert.accept()
                 log.write('成功打卡'+'\n')
             browser.quit()
             log.write('---------------------------------------'+'\n')
@@ -56,9 +53,10 @@ while True:
             log.write('++++++'+'\n')
             log.write('不到打卡时间'+'\n')
             log.write('++++++'+'\n')
-        time.sleep(5*60)
+        time.sleep(10*60)
     except Exception:
         log.write('出现异常'+'\n')
+    browser.quit()
     log.write('\n')
     log.flush()
 log.close()
