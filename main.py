@@ -56,7 +56,7 @@ while True:
             log.write('不到打卡时间'+'\n')
             log.write('++++++'+'\n')
 
-        time.sleep(0.1)
+        time.sleep(10*60)
     except Exception:
         log.write('出现异常'+'\n')
         browser.quit()
