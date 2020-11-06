@@ -1,11 +1,13 @@
 from selenium import webdriver
 import time
 import datetime
-log = open('./log.txt','a')
+
 username = '' #统一身份用户名
 password = ''  #统一身份密码
-while True:   
+while True:
+    log = open('./log.txt','a')   
     try:
+        print('当前时间： '+str(datetime.datetime.now()))
         log.write('当前时间： '+str(datetime.datetime.now())+'\n')
         now = datetime.datetime.now().strftime("%H:%M")
         if now >='07:00' and now<='12:00':
@@ -13,8 +15,8 @@ while True:
             log.write(str(datetime.datetime.now())+' 询问打卡'+'\n')
             option = webdriver.ChromeOptions()
             option.add_experimental_option('excludeSwitches', ['enable-automation'])
-            option.add_argument('--headless')
-            option.add_argument('--disable-gpu')
+            #option.add_argument('--headless')
+            #option.add_argument('--disable-gpu')
             browser = webdriver.Chrome(executable_path="C:/Program Files/Google/Chrome/Application/chromedriver.exe",options=option)
             browser.get('https://xmuxg.xmu.edu.cn/xmu/login')
             time.sleep(0.1)
@@ -53,10 +55,11 @@ while True:
             log.write('++++++'+'\n')
             log.write('不到打卡时间'+'\n')
             log.write('++++++'+'\n')
+
         time.sleep(10*60)
     except Exception:
         log.write('出现异常'+'\n')
-    browser.quit()
+        browser.quit()
+        
     log.write('\n')
-    log.flush()
-log.close()
+    log.close()
