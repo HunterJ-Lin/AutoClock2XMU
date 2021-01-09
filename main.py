@@ -24,7 +24,7 @@ while True:
             time.sleep(0.1)
             browser.find_element_by_xpath('//*[@id="username"]').send_keys(username)
             browser.find_element_by_xpath('//*[@id="password"]').send_keys(password)
-            browser.find_element_by_xpath('//*[@id="casLoginForm"]/p[5]/button').click()
+            browser.find_element_by_xpath('//*[@id="casLoginForm"]/p[*]/button').click()
             current_window = browser.current_window_handle  # 获取当前窗口handle name
             time.sleep(0.1)
             #print('cur:',current_window)
