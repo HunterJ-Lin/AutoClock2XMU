@@ -63,7 +63,7 @@ while True:
             option.add_experimental_option('excludeSwitches', ['enable-automation'])
             option.add_argument('--headless')
             option.add_argument('--disable-gpu')
-            browser = webdriver.Chrome(executable_path="/home/kick/Soft/chromedriver",options=option)
+            browser = webdriver.Chrome(executable_path="/home/kick/Soft/chromedriver",options=option) #配置webdriver
             browser.get('https://xmuxg.xmu.edu.cn/login')
 
             time.sleep(1)
