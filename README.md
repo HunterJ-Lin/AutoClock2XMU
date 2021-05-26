@@ -6,6 +6,7 @@
 
 # 环境要求
 windows、python、selenium（需要配置chromedriver驱动，目前仅支持chrome浏览器，最好禁止chrome浏览器更新，否则需要频繁更换对应版本的chromedriver驱动）、根据自己的统一身份认证，qq邮箱配置config.json
+```
 {
     "username" : "", 
     "password" : "", 
@@ -18,6 +19,7 @@ windows、python、selenium（需要配置chromedriver驱动，目前仅支持ch
     "chromedriver" : "C:/Program Files/Google/Chrome/Application/chromedriver.exe",
     "comment" : "username -> 统一身份用户名, password -> 统一身份密码, receiver -> 接收打卡信息的邮箱, host_server -> QQ邮箱smtp服务器, sender_qq -> 发送者QQ, pwd -> qq邮箱授权码, sender_qq_mail -> 发送者QQ邮箱地址, chromedriver -> chrome驱动程序路径, log_file -> log文件"
 }
+```
 
 # 使用方法
 1、双击start_hidden.vbs(一次，不然会开启多个后台进程)
