@@ -135,9 +135,6 @@ def main():
             except Exception:
                 pass
             
-
-            
-
         print('\n')
 
 if __name__ == '__main__':
