@@ -1,3 +1,4 @@
 test.py
 *.log
 *.txt
+*.json
