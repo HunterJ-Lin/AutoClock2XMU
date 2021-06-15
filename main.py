@@ -52,8 +52,7 @@ def main():
             print('当前时间： '+str(datetime.datetime.now()))
             now = datetime.datetime.now().strftime("%H:%M")
 
-            # 这里把时间分成两部分，第一部分主要为打卡，第二部分为检查
-            if (now>='07:00' and now<='11:00') or (now>='14:00' and now<='19:00'):
+            if (now>='07:00' and now<='09:00'):
 
                 print('---------------------------------------'+'\n')
                 print(str(datetime.datetime.now())+' 询问打卡'+'\n')
@@ -83,6 +82,7 @@ def main():
                         browser.switch_to.window(window)
 
                 current_window = browser.current_window_handle  # 获取当前窗口handle name
+                time.sleep(2)
                 browser.find_element_by_xpath('//*[@id="mainM"]/div/div/div/div[1]/div[2]/div/div[3]/div[2]').click()
                 time.sleep(1)
                 browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
@@ -91,11 +91,11 @@ def main():
                 if browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[1]').get_attribute('innerHTML') == '是 Yes':
                     print('已打过卡'+'\n')
 
-                    if now>='17:00' and now<='17:30':
+                    # if now>='17:00' and now<='17:30':
 
-                        intitle = 'Check mail, today is OK! \n'
-                        intext = 'Check again whether to check in \n'
-                        SendMail(config, intitle, intext)
+                    #     intitle = 'Check mail, today is OK! \n'
+                    #     intext = 'Check again whether to check in \n'
+                    #     SendMail(config, intitle, intext)
 
                 else:
 
@@ -122,18 +122,15 @@ def main():
 
         except Exception as e:
 
-            print('出现异常'+'\n')
-            print(e)
-            if now>='17:00' and now<='17:30':
-
+            print('出现异常')
+            if True:
                 intitle = 'ERRORS!!! Check it carefully. \n'
-                intext = e
+                intext = '出现异常'
                 SendMail(config, intitle, intext)
+            print(e)
 
-            try:
+            if browser is not None:
                 browser.quit()
-            except Exception:
-                pass
             
         print('\n')
 
