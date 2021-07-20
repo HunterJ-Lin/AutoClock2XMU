@@ -52,19 +52,19 @@ def main():
             print('当前时间： '+str(datetime.datetime.now()))
             now = datetime.datetime.now().strftime("%H:%M")
 
-            if (now>='07:00' and now<='09:00'):
+            if True or (now>='07:00' and now<='09:00'):
 
                 print('---------------------------------------'+'\n')
                 print(str(datetime.datetime.now())+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
                 option.add_experimental_option('excludeSwitches', ['enable-automation'])
-                option.add_argument('--headless')
-                option.add_argument('--disable-gpu')
+                #option.add_argument('--headless')
+                #option.add_argument('--disable-gpu')
                 browser = webdriver.Chrome(executable_path=config['chromedriver'],options=option)
                 browser.get('https://xmuxg.xmu.edu.cn/login')
 
                 time.sleep(1)
-                browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[2]').click()
+                browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[3]').click()
                 time.sleep(1)
                 browser.find_element_by_xpath('//*[@id="username"]').send_keys(config['username'])
                 browser.find_element_by_xpath('//*[@id="password"]').send_keys(config['password'])
@@ -131,7 +131,7 @@ def main():
 
             if browser is not None:
                 browser.quit()
-            
+            time.sleep(60*60) 
         print('\n')
 
 if __name__ == '__main__':
