@@ -52,7 +52,7 @@ def main():
             print('当前时间： '+str(datetime.datetime.now()))
             now = datetime.datetime.now().strftime("%H:%M")
 
-            if True or (now>='07:00' and now<='09:00'):
+            if (now>='07:00' and now<='09:00'):
 
                 print('---------------------------------------'+'\n')
                 print(str(datetime.datetime.now())+' 询问打卡'+'\n')
