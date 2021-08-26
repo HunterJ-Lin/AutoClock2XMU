@@ -73,7 +73,7 @@ def main():
                 time.sleep(1)
 
                 #print('cur:',current_window)
-                browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div[1]').click()
+                browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div[2]').click()
                 time.sleep(2)
                 all_window=browser.window_handles
                 #print('all',all_window)
