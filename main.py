@@ -58,8 +58,8 @@ def main():
                 print(str(datetime.datetime.now())+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
                 option.add_experimental_option('excludeSwitches', ['enable-automation'])
-                option.add_argument('--headless')
-                option.add_argument('--disable-gpu')
+                # option.add_argument('--headless')
+                # option.add_argument('--disable-gpu')
                 browser = webdriver.Chrome(executable_path=config['chromedriver'],options=option)
                 browser.get('https://xmuxg.xmu.edu.cn/login')
 
@@ -73,7 +73,9 @@ def main():
                 time.sleep(1)
 
                 #print('cur:',current_window)
-                browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div[2]').click()
+                #browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div').click()
+                browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(3) > div.grow_1.box_flex.column.justify_center > div.text').click()
+                
                 time.sleep(2)
                 all_window=browser.window_handles
                 #print('all',all_window)
