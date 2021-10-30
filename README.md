@@ -21,7 +21,7 @@ sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
 ```
-## config.json配置
+## 4、config.json配置
 ```
 {
     "username" : "", 
