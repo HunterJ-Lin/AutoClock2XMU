@@ -2,4 +2,5 @@ test.py
 *.log
 *.txt
 *.json
+*.out
 __pycache__

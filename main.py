@@ -58,8 +58,8 @@ def main():
                 print(str(datetime.datetime.now())+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
                 option.add_experimental_option('excludeSwitches', ['enable-automation'])
-                # option.add_argument('--headless')
-                # option.add_argument('--disable-gpu')
+                option.add_argument('--headless')
+                option.add_argument('--disable-gpu')
                 browser = webdriver.Chrome(executable_path=config['chromedriver'],options=option)
                 browser.get('https://xmuxg.xmu.edu.cn/login')
 
