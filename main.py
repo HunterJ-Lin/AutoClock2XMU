@@ -74,6 +74,7 @@ def main():
 
                 #print('cur:',current_window)
                 #browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div').click()
+                #注意学校系统维护，经常会修改css选择器
                 browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(3) > div.grow_1.box_flex.column.justify_center > div.text').click()
                 
                 time.sleep(2)
