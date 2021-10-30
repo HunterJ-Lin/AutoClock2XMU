@@ -5,7 +5,7 @@
 打卡是基于学校要求我们每天进行的活动以向学校报告我们的情况。但是由于大多数情况我们都是正常状态。因此这个项目可以帮助我们在正常情况下进行自动打卡确认，减少不必要的重复无意义劳动是本项目的初衷。在出现身体不适时可以通过修改打卡内容来报告非正常情况，希望此项目能够在你如实汇报内容的情况下带来便利。
 
 # 环境要求
-windows、python、selenium（需要配置chromedriver驱动，目前仅支持chrome浏览器，最好禁止chrome浏览器更新，否则需要频繁更换对应版本的chromedriver驱动）、根据自己的统一身份认证，qq邮箱配置config.json
+windows(linux请切换到linux分支)、python、selenium（需要配置chromedriver驱动，目前仅支持chrome浏览器，最好禁止chrome浏览器更新，否则需要频繁更换对应版本的chromedriver驱动）、根据自己的统一身份认证，qq邮箱配置config.json
 ```
 {
     "username" : "", 
@@ -22,6 +22,8 @@ windows、python、selenium（需要配置chromedriver驱动，目前仅支持ch
 ```
 
 # 使用方法
+0、如果使用linux系统，请切换分支 git checkout -b linux origin/linux
+
 1、双击start_hidden.vbs(一次，不然会开启多个后台进程)
 
 2、双击stop_all_python.bat(注意！！！会杀死所有python进程)
