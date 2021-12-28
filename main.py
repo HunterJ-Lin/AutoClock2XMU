@@ -128,8 +128,8 @@ def main():
             print('出现异常')
             if True:
                 intitle = 'ERRORS!!! Check it carefully. \n'
-                intext = '出现异常'
-                SendMail(config, intitle, intext)
+                intext = '出现异常:'
+                SendMail(config, intitle, intext+str(e))
             print(e)
 
             if browser is not None:
