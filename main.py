@@ -63,7 +63,7 @@ def main():
             logger.info('当前时间： '+str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z")))
             now = get_world_time_now(strftime="%H:%M")
 
-            if True or (now>='07:00' and now<='09:00'):
+            if (now>='07:00' and now<='09:00'):
                 logger.info('---------------------------------------'+'\n')
                 logger.info(str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z"))+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
