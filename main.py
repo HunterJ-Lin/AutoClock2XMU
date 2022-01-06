@@ -1,10 +1,9 @@
 from selenium import webdriver
+from datetime import datetime
 import time
-import datetime
-import sys
-from logger import Logger
+import logging
 import json
-
+import pytz
 
 #定义邮件功能，发件方以QQ邮箱为例
 # intitle, 接收邮件的标题
@@ -22,10 +21,10 @@ def SendMail(config, intitle, intext):
     username = config['username']
     receiver = config['receiver']
 
-    mail_content = intext + str(datetime.datetime.now())
+    mail_content = intext + str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z"))
     mail_content += 'Here is the test data, please confirm: \n'
     mail_content += '1> Username:' + username + '\n'
-    mail_content += '2> Time:' + str(datetime.datetime.now()) + '\n'
+    mail_content += '2> Time:' + str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z")) + '\n'
     mail_content += '3> Your Email:' + receiver + '\n'
     mail_content += '4> Host Email:' + sender_qq + '\n'
     mail_title = intitle
@@ -42,20 +41,31 @@ def SendMail(config, intitle, intext):
     smtp.sendmail(sender_qq_mail, receiver, msg.as_string())
     smtp.quit()
 
+def get_world_time_now(strftime="%H:%M",timezone='Asia/Shanghai'):
+    return datetime.fromtimestamp(int(time.time()),pytz.timezone(timezone)).strftime(strftime)
+
 
 def main():
-    with open('config.json','rb') as f: config = json.load(f)
-    sys.stdout = Logger(config['log_file'])
+    with open('config.json','rb') as f: config = json.load(f) 
+    logger = logging.getLogger(__name__)
+    logger.setLevel(level = logging.INFO)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    file_handler = logging.FileHandler(config['log_file'],"w", encoding="UTF-8")
+    file_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
     while True:
         try:
 
-            print('当前时间： '+str(datetime.datetime.now()))
-            now = datetime.datetime.now().strftime("%H:%M")
+            logger.info('当前时间： '+str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z")))
+            now = get_world_time_now(strftime="%H:%M")
 
             if (now>='07:00' and now<='09:00'):
-
-                print('---------------------------------------'+'\n')
-                print(str(datetime.datetime.now())+' 询问打卡'+'\n')
+                logger.info('---------------------------------------'+'\n')
+                logger.info(str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z"))+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
                 option.add_experimental_option('excludeSwitches', ['enable-automation'])
                 option.add_argument('--headless')
@@ -75,7 +85,7 @@ def main():
                 #print('cur:',current_window)
                 #browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div').click()
                 #注意学校系统维护，经常会修改css选择器
-                browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(3) > div.grow_1.box_flex.column.justify_center > div.text').click()
+                browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(2) > div.grow_1.box_flex.column.justify_center > div.text').click()
                 
                 time.sleep(2)
                 all_window=browser.window_handles
@@ -92,50 +102,41 @@ def main():
                 time.sleep(1)
 
                 if browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[1]').get_attribute('innerHTML') == '是 Yes':
-                    print('已打过卡'+'\n')
-
-                    # if now>='17:00' and now<='17:30':
-
-                    #     intitle = 'Check mail, today is OK! \n'
-                    #     intext = 'Check again whether to check in \n'
-                    #     SendMail(config, intitle, intext)
-
+                    logger.info('已打过卡'+'\n')
                 else:
-
                     browser.find_element_by_xpath('/html/body/div[8]/ul/div/div[3]/li').click()
                     browser.find_element_by_class_name('form-save').click()
                     alert = browser.switch_to.alert
                     alert.accept()
-                    print('成功打卡'+'\n')
+                    logger.info('成功打卡'+'\n')
 
                     intitle = 'Successfully clocked again! \n'
                     intext = 'Congratulations, you have successfully clocked in \n'
                     SendMail(config, intitle, intext)
 
                 browser.quit()
-                print('---------------------------------------'+'\n')
+                logger.info('---------------------------------------'+'\n')
 
             else:
-
-                print('++++++'+'\n')
-                print('不到打卡时间'+'\n')
-                print('++++++'+'\n')
+                logger.info('++++++'+'\n')
+                logger.info('不到打卡时间'+'\n')
+                logger.info('++++++'+'\n')
 
             time.sleep(20*60)  #这里调整检查间隔，此时设置为20分钟一次。
 
         except Exception as e:
 
-            print('出现异常')
+            logger.warning('出现异常')
             if True:
                 intitle = 'ERRORS!!! Check it carefully. \n'
                 intext = '出现异常:'
                 SendMail(config, intitle, intext+str(e))
-            print(e)
+            logger.warning(e)
 
             if browser is not None:
                 browser.quit()
             time.sleep(60*60) 
-        print('\n')
+        logger.info('\n')
 
 if __name__ == '__main__':
     main()
