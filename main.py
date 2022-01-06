@@ -1,5 +1,4 @@
 from selenium import webdriver
-import time
 from datetime import datetime
 import time
 import logging
