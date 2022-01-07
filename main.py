@@ -63,7 +63,7 @@ def main():
             logger.info('当前时间： '+str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z")))
             now = get_world_time_now(strftime="%H:%M")
 
-            if (now>='07:00' and now<='09:00'):
+            if (now>='07:00' and now<='12:00'):
                 logger.info('---------------------------------------'+'\n')
                 logger.info(str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z"))+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
@@ -73,21 +73,21 @@ def main():
                 browser = webdriver.Chrome(executable_path=config['chromedriver'],options=option)
                 browser.get('https://xmuxg.xmu.edu.cn/login')
 
-                time.sleep(1)
+                time.sleep(3)
                 browser.find_element_by_xpath('//*[@id="loginLayout"]/div[3]/div[2]/div/button[3]').click()
-                time.sleep(1)
+                time.sleep(3)
                 browser.find_element_by_xpath('//*[@id="username"]').send_keys(config['username'])
                 browser.find_element_by_xpath('//*[@id="password"]').send_keys(config['password'])
                 browser.find_element_by_xpath('//*[@id="casLoginForm"]/p[*]/button').click()
                 current_window = browser.current_window_handle  # 获取当前窗口handle name
-                time.sleep(1)
+                time.sleep(3)
 
                 #print('cur:',current_window)
                 #browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div').click()
                 #注意学校系统维护，经常会修改css选择器
                 browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(2) > div.grow_1.box_flex.column.justify_center > div.text').click()
                 
-                time.sleep(2)
+                time.sleep(3)
                 all_window=browser.window_handles
                 #print('all',all_window)
                 for window in all_window:
@@ -95,11 +95,11 @@ def main():
                         browser.switch_to.window(window)
 
                 current_window = browser.current_window_handle  # 获取当前窗口handle name
-                time.sleep(2)
+                time.sleep(3)
                 browser.find_element_by_xpath('//*[@id="mainM"]/div/div/div/div[1]/div[2]/div/div[3]/div[2]').click()
-                time.sleep(1)
+                time.sleep(3)
                 browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
-                time.sleep(1)
+                time.sleep(3)
 
                 if browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[1]').get_attribute('innerHTML') == '是 Yes':
                     logger.info('已打过卡'+'\n')
