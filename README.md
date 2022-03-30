@@ -11,12 +11,15 @@ windows(linux请切换到linux分支)、python、selenium（需要配置chromedr
     "username" : "", 
     "password" : "", 
     "receiver" : "", 
-    "host_server" : "",  
+    "host_server" : "smtp.qq.com",  
     "sender_qq" : "",  
     "pwd" : "",  
     "sender_qq_mail" : "",
     "log_file" : "./log.txt",
     "chromedriver" : "C:/Program Files/Google/Chrome/Application/chromedriver.exe",
+    "province" : "福建省",
+    "city" : "厦门市",
+    "district" : "思明区",
     "comment" : "username -> 统一身份用户名, password -> 统一身份密码, receiver -> 接收打卡信息的邮箱, host_server -> QQ邮箱smtp服务器, sender_qq -> 发送者QQ, pwd -> qq邮箱授权码, sender_qq_mail -> 发送者QQ邮箱地址, chromedriver -> chrome驱动程序路径, log_file -> log文件"
 }
 ```

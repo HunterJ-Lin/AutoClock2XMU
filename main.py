@@ -44,6 +44,25 @@ def SendMail(config, intitle, intext):
 def get_world_time_now(strftime="%H:%M",timezone='Asia/Shanghai'):
     return datetime.fromtimestamp(int(time.time()),pytz.timezone(timezone)).strftime(strftime)
 
+def locate(browser, province_='福建省', city_='厦门市', district_='思明区'):
+    #省份
+    browser.find_element_by_xpath('/html/body/div[1]/div/div/div/div/div[2]/div[1]/div/div/div/div[4]/div/div[10]/div/div/div[1]/div/div').click()
+    browser.find_element_by_xpath('/html/body/div[8]/ul/div[1]/input').send_keys('福建省')
+    browser.find_element_by_xpath('/html/body/div[8]/ul/div[2]/div[3]/li').click()
+    #市
+    browser.find_element_by_xpath('/html/body/div[1]/div/div/div/div/div[2]/div[1]/div/div/div/div[4]/div/div[10]/div/div/div[2]/div/div').click()
+    cities = browser.find_elements_by_class_name('dropdown-items')
+    for i,city in enumerate(cities):
+        if city.text == '厦门市':
+            city.click()
+            break
+    #区
+    browser.find_element_by_xpath('/html/body/div[1]/div/div/div/div/div[2]/div[1]/div/div/div/div[4]/div/div[10]/div/div/div[3]/div/div').click()
+    districts = browser.find_elements_by_class_name('dropdown-items')
+    for i,district in enumerate(districts):
+        if district.text == '思明区':
+            district.click()
+        break
 
 def main():
     with open('config.json','rb') as f: config = json.load(f) 
@@ -98,12 +117,15 @@ def main():
                 time.sleep(2)
                 browser.find_element_by_xpath('//*[@id="mainM"]/div/div/div/div[1]/div[2]/div/div[3]/div[2]').click()
                 time.sleep(1)
-                browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
-                time.sleep(1)
-
+                # browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
+                # time.sleep(1)
+                
                 if browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[1]').get_attribute('innerHTML') == '是 Yes':
                     logger.info('已打过卡'+'\n')
                 else:
+                    locate(browser=browser,province_=config['province'],city_=config['city'],district_=config['district'])
+
+                    browser.find_element_by_xpath('//*[@id="select_1582538939790"]/div/div/span[2]/i').click()
                     browser.find_element_by_xpath('/html/body/div[8]/ul/div/div[3]/li').click()
                     browser.find_element_by_class_name('form-save').click()
                     alert = browser.switch_to.alert
