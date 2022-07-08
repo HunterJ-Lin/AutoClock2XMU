@@ -82,7 +82,7 @@ def main():
             logger.info('当前时间： '+str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z")))
             now = get_world_time_now(strftime="%H:%M")
 
-            if (now>='07:00' and now<='09:00'):
+            if(now>='07:00' and now<='09:00'):
                 logger.info('---------------------------------------'+'\n')
                 logger.info(str(get_world_time_now(strftime="%Y-%m-%d %H:%M:%S %Z%z"))+' 询问打卡'+'\n')
                 option = webdriver.ChromeOptions()
@@ -102,9 +102,9 @@ def main():
                 time.sleep(1)
 
                 #print('cur:',current_window)
-                #browser.find_element_by_xpath('//*[@id="mainPage-page"]/div[1]/div[3]/div[2]/div[2]/div[3]/div/div').click()
+                browser.find_element_by_xpath('/html/body/div[1]/div/div/div/div[2]/div/div[1]/div[3]/div[2]/div[2]/div[3]/div/div[2]').click()
                 #注意学校系统维护，经常会修改css选择器
-                browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(3) > div.grow_1.box_flex.column.justify_center > div.text').click()
+                # browser.find_element_by_css_selector('#mainPage-page > div.v-gm-scrollbar.main-p.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div.shadow_box.box_wrap_2 > div.v-gm-scrollbar.gm-autoshow.gm-scrollbar-container > div.gm-scroll-view > div > div:nth-child(3) > div.grow_1.box_flex.column.justify_center > div.text').click()
                 
                 time.sleep(2)
                 all_window=browser.window_handles
